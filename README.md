@@ -17,7 +17,11 @@ Sequelize is a promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite an
 
 Sequelize follows [SEMVER](http://semver.org). Supports Node v6 and above to use ES6 features.
 
-New to Sequelize? Take a look at the [Tutorials and Guides](https://sequelize.org/master). You might also be interested in the [API Reference](https://sequelize.org/master/identifiers).
+New to Sequelize? Take a look at the [Tutorials and Guides](http://docs.sequelizejs.com/). You might also be interested in the [API Reference](https://docs.sequelizejs.com/identifiers).
+
+## v6 Release
+
+You can find the upgrade guide and changelog [here](http://docs.sequelizejs.com/manual/upgrade-to-v6.html).
 
 ## Table of Contents
 - [Installation](#installation)
@@ -28,7 +32,7 @@ New to Sequelize? Take a look at the [Tutorials and Guides](https://sequelize.or
 ## Installation
 
 ```bash
-$ npm install --save sequelize # This will install v5
+$ npm install --save sequelize # This will install v6
 
 # And one of the following:
 $ npm install --save pg pg-hstore # Postgres
@@ -39,6 +43,7 @@ $ npm install --save tedious # Microsoft SQL Server
 ```
 
 ## Documentation
+- [v6 Documentation](http://docs.sequelizejs.com)
 - [v5 Documentation](https://sequelize.org/master)
 - [v4 Documentation](https://sequelize.org/v4)
 - [v3 Documentation](https://sequelize.org/v3)
