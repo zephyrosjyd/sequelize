@@ -20,9 +20,9 @@ Sequelize follows [SEMVER](http://semver.org). Supports Node v6 and above to use
 
 New to Sequelize? Take a look at the [Tutorials and Guides](https://sequelize.org/master). You might also be interested in the [API Reference](https://sequelize.org/master/identifiers).
 
-## v5 Release
+## v6 Release
 
-You can find the upgrade guide and changelog [here](https://sequelize.org/master/manual/upgrade-to-v5.html).
+You can find the upgrade guide and changelog [here](https://sequelize.org/master/manual/upgrade-to-v6.html).
 
 ## Table of Contents
 - [Installation](#installation)
@@ -33,7 +33,7 @@ You can find the upgrade guide and changelog [here](https://sequelize.org/master
 ## Installation
 
 ```bash
-$ npm install --save sequelize # This will install v5
+$ npm install --save sequelize # This will install v6
 
 # And one of the following:
 $ npm install --save pg pg-hstore # Postgres
@@ -44,7 +44,8 @@ $ npm install --save tedious # Microsoft SQL Server
 ```
 
 ## Documentation
-- [v5 Documentation](https://sequelize.org/master)
+- [v6 Documentation](https://sequelize.org/master)
+- [v5 Documentation](https://sequelize.org/v5)
 - [v4 Documentation](https://sequelize.org/v4)
 - [v3 Documentation](https://sequelize.org/v3)
 - [Contributing](https://github.com/sequelize/sequelize/blob/master/CONTRIBUTING.md)
