@@ -833,7 +833,7 @@ describe(Support.getTestDialectTeaser('Sequelize'), () => {
           'override': overrideGetterMethod
         }
       };
-      const testEntity = this.sequelize.define('TestEntity', {}, {
+      const TestEntity = this.sequelize.define('TestEntity', {}, {
         'setterMethods': {
           'custom': customSetterMethod,
           'override': customOverrideSetterMethod
@@ -845,7 +845,7 @@ describe(Support.getTestDialectTeaser('Sequelize'), () => {
       });
 
       // Create Instance to test
-      const instance = testEntity.build();
+      const instance = new TestEntity();
 
       // Call Getters
       instance.default;
