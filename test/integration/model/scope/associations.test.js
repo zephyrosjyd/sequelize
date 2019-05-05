@@ -36,8 +36,8 @@ describe(Support.getTestDialectTeaser('Model'), () => {
             includeActiveProjects() {
               return {
                 include: [{
-                  model: sequelize.models.company,
-                  include: [sequelize.models.project.scope('active')]
+                  model: sequelize.modelManager.getModel('company'),
+                  include: [sequelize.modelManager.getModel('project').scope('active')]
                 }]
               };
             }

@@ -873,9 +873,9 @@ describe(Support.getTestDialectTeaser('Sequelize'), () => {
     });
 
     it('adds a new dao to sequelize.models', function() {
-      expect(this.sequelize.models.bar).to.equal(undefined);
+      expect(this.sequelize.modelManager.getModel('bar')).to.equal(undefined);
       const Bar = this.sequelize.define('bar', { title: DataTypes.STRING });
-      expect(this.sequelize.models.bar).to.equal(Bar);
+      expect(this.sequelize.modelManager.getModel('bar')).to.equal(Bar);
     });
 
     it('overwrites global options', () => {

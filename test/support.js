@@ -6,6 +6,7 @@ const Sequelize = require('../index');
 const Config = require('./config/config');
 const chai = require('chai');
 const expect = chai.expect;
+const ModelManager = require('../lib/model-manager');
 const AbstractQueryGenerator = require('../lib/dialects/abstract/query-generator');
 const sinon = require('sinon');
 
@@ -92,8 +93,7 @@ const Support = {
       .getQueryInterface()
       .dropAllTables()
       .then(() => {
-        sequelize.modelManager.models = [];
-        sequelize.models = {};
+        sequelize.modelManager = new ModelManager();
 
         return sequelize
           .getQueryInterface()

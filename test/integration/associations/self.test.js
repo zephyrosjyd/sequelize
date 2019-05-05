@@ -51,7 +51,7 @@ describe(Support.getTestDialectTeaser('Self'), () => {
     Person.belongsToMany(Person, { as: 'Childs', through: 'Family', foreignKey: 'PersonId', otherKey: 'ChildId' });
 
     const foreignIdentifiers = Object.values(Person.associations).map(v => v.foreignIdentifier);
-    const rawAttributes = Object.keys(this.sequelize.models.Family.rawAttributes);
+    const rawAttributes = Object.keys(this.sequelize.modelManager.getModel('Family').rawAttributes);
 
     expect(foreignIdentifiers.length).to.equal(2);
     expect(rawAttributes.length).to.equal(4);
