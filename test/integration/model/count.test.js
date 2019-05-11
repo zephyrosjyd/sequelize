@@ -15,10 +15,10 @@ describe(Support.getTestDialectTeaser('Model'), () => {
       this.Project = this.sequelize.define('Project', {
         name: DataTypes.STRING
       });
-  
+
       this.User.hasMany(this.Project);
       this.Project.belongsTo(this.User);
-  
+
       return this.sequelize.sync({ force: true });
     });
 
@@ -53,7 +53,7 @@ describe(Support.getTestDialectTeaser('Model'), () => {
         { username: 'bar' },
         {
           username: 'valak',
-          createdAt: (new Date()).setFullYear(2015)
+          createdAt: new Date().setFullYear(2015)
         }
       ]).then(() => this.User.count({
         attributes: ['createdAt'],
