@@ -110,6 +110,15 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
+  "release": {
+    "branches": [
+      "master",
+      {
+        "name": "next",
+        "prerelease": true
+      }
+    ]
+  },
   "scripts": {
     "lint": "eslint lib test --quiet",
     "lint-docs": "markdownlint docs",
