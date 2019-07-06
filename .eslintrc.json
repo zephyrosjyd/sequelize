@@ -6,7 +6,7 @@
 
     "jsdoc/check-param-names": "error",
     "jsdoc/check-tag-names": "error",
-    "jsdoc/check-types": "error",
+    "jsdoc/check-types": "off",
     "jsdoc/newline-after-description": "error",
     "jsdoc/no-undefined-types": "off",
     "jsdoc/require-description-complete-sentence": "off",
