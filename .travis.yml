@@ -86,6 +86,6 @@ stages:
   - lint
   - test
   - name: release
-    if: (branch = master OR branch = next) AND type = push AND fork = false
+    if: (branch = master) AND type = push AND fork = false
   - name: docs
     if: branch = master AND type = push AND fork = false
