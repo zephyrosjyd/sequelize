@@ -14,25 +14,6 @@ export abstract class Association<S extends Model = Model, T extends Model = Mod
   public inspect(): string;
 }
 
-export interface SingleAssociationAccessors {
-  get: string;
-  set: string;
-  create: string;
-}
-
-export interface MultiAssociationAccessors {
-  get: string;
-  set: string;
-  addMultiple: string;
-  add: string;
-  create: string;
-  remove: string;
-  removeMultiple: string;
-  hasSingle: string;
-  hasAll: string;
-  count: string;
-}
-
 /** Foreign Key Options */
 export interface ForeignKeyOptions extends ColumnOptions {
   /** Attribute name for the relation */
@@ -44,13 +25,13 @@ export interface ForeignKeyOptions extends ColumnOptions {
  */
 export interface AssociationOptions extends Hookable {
   /**
-   * The alias of this model, in singular form. See also the `name` option passed to `sequelize.define`. If
+   * The alias of this model. See also the `name` option passed to `sequelize.define`. If
    * you create multiple associations between the same tables, you should provide an alias to be able to
    * distinguish between them. If you provide an alias when creating the assocition, you should provide the
    * same alias when eager loading and when getting associated models. Defaults to the singularized name of
    * target
    */
-  as?: string | { singular: string; plural: string };
+  as?: string;
 
   /**
    * The name of the foreign key in the target table or an object representing the type definition for the

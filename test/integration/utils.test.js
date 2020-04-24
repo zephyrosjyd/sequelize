@@ -130,8 +130,6 @@ describe(Support.getTestDialectTeaser('Utils'), () => {
       expect(Utils.pluralize('holiday')).to.equal('holidays');
       expect(Utils.pluralize('days')).to.equal('days');
       expect(Utils.pluralize('status')).to.equal('statuses');
-
-      expect(Utils.singularize('status')).to.equal('status');
     });
   });
 

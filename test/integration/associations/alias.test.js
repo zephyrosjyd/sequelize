@@ -59,11 +59,11 @@ describe(Support.getTestDialectTeaser('Alias'), () => {
     });
   });
 
-  it('should allow me to pass my own plural and singular forms to hasMany', function() {
+  it('should allow me to pass my own name form to hasMany', function() {
     const User = this.sequelize.define('user', {}),
       Task = this.sequelize.define('task', {});
 
-    User.hasMany(Task, { as: { singular: 'task', plural: 'taskz' } });
+    User.hasMany(Task, { as: 'taskz' });
 
     return this.sequelize.sync({ force: true }).then(() => {
       return User.create({ id: 1 });
@@ -78,13 +78,10 @@ describe(Support.getTestDialectTeaser('Alias'), () => {
     });
   });
 
-  it('should allow me to define plural and singular forms on the model', function() {
+  it('should allow me to define name form on the model', function() {
     const User = this.sequelize.define('user', {}),
       Task = this.sequelize.define('task', {}, {
-        name: {
-          singular: 'assignment',
-          plural: 'assignments'
-        }
+        name: 'assignment'
       });
 
     User.hasMany(Task);

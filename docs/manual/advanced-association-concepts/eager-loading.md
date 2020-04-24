@@ -47,7 +47,7 @@ Output:
 
 Here, `tasks[0].user instanceof User` is `true`. This shows that when Sequelize fetches associated models, they are added to the output object as model instances.
 
-Above, the associated model was added to a new field called `user` in the fetched task. The name of this field was automatically chosen by Sequelize based on the name of the associated model, where its pluralized form is used when applicable (i.e., when  the association is `hasMany` or `belongsToMany`). In other words, since `Task.belongsTo(User)`, a task is associated to one user, therefore the logical choice is the singular form (which Sequelize follows automatically).
+Above, the associated model was added to a new field called `user` in the fetched task. The name of this field was automatically chosen by Sequelize based on the name of the associated model, where its pluralized form is used when applicable (i.e., when  the association is `hasMany` or `belongsToMany`). In other words, since `Task.belongsTo(User)`, a task is associated to one user, therefore the logical choice is the singular form.
 
 ### Fetching all associated elements
 

@@ -4,7 +4,6 @@ import { Model, WhereOptions } from './model';
 export type Primitive = 'string' | 'number' | 'boolean';
 
 export interface Inflector {
-  singularize(str: string): string;
   pluralize(str: string): string;
 }
 
@@ -43,7 +42,6 @@ export function isColString(value: string): boolean;
 export function canTreatArrayAsAnd(arr: unknown[]): boolean;
 export function combineTableNames(tableName1: string, tableName2: string): string;
 
-export function singularize(s: string): string;
 export function pluralize(s: string): string;
 
 export function toDefaultValue<T>(value: unknown): unknown;

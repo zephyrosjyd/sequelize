@@ -117,10 +117,7 @@ When defining an alias for an association, instead of using simply `{ as: 'myAli
 
 ```js
 Project.belongsToMany(User, {
-  as: {
-    singular: 'líder',
-    plural: 'líderes'
-  }
+  as: 'líderes'
 });
 ```
 
@@ -128,10 +125,7 @@ If you know that a model will always use the same alias in associations, you can
 
 ```js
 const User = sequelize.define('user', { /* ... */ }, {
-  name: {
-    singular: 'líder',
-    plural: 'líderes',
-  }
+  name: 'líder'
 });
 Project.belongsToMany(User);
 ```

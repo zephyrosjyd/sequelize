@@ -915,7 +915,7 @@ describe(Support.getTestDialectTeaser('HasOne'), () => {
           where: { name: 'Foo Bar' },
           include: [{
             model: this.Hat,
-            as: { singular: 'personwearinghat' }
+            as: 'personwearinghat'
           }]
         });
       }).then(individual => {

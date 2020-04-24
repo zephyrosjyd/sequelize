@@ -399,7 +399,7 @@ describe(Support.getTestDialectTeaser('BelongsToMany'), () => {
           expect(users[1].Groups[0].usergroups.UserUserSecondId).to.be.equal(users[1].userSecondId);
           expect(users[1].Groups[0].usergroups.GroupGroupSecondId).to.be.ok;
           expect(users[1].Groups[0].usergroups.GroupGroupSecondId).to.be.equal(users[1].Groups[0].groupSecondId);
-          
+
           expect(groups.length).to.be.equal(2);
           expect(groups[0].Users.length).to.be.equal(1);
           expect(groups[1].Users.length).to.be.equal(1);
@@ -483,7 +483,7 @@ describe(Support.getTestDialectTeaser('BelongsToMany'), () => {
           expect(users[1].Groups[0].usergroups.UserUserSecondId).to.be.equal(users[1].userSecondId);
           expect(users[1].Groups[0].usergroups.GroupId).to.be.ok;
           expect(users[1].Groups[0].usergroups.GroupId).to.be.equal(users[1].Groups[0].id);
-          
+
           expect(groups.length).to.be.equal(2);
           expect(groups[0].Users.length).to.be.equal(1);
           expect(groups[1].Users.length).to.be.equal(1);
@@ -573,7 +573,7 @@ describe(Support.getTestDialectTeaser('BelongsToMany'), () => {
           expect(users[1].Groups[0].usergroups.UserUserSecondId).to.be.equal(users[1].userSecondId);
           expect(users[1].Groups[0].usergroups.GroupGroupSecondId).to.be.ok;
           expect(users[1].Groups[0].usergroups.GroupGroupSecondId).to.be.equal(users[1].Groups[0].groupSecondId);
-          
+
           expect(groups.length).to.be.equal(2);
           expect(groups[0].Users.length).to.be.equal(1);
           expect(groups[1].Users.length).to.be.equal(1);
@@ -674,7 +674,7 @@ describe(Support.getTestDialectTeaser('BelongsToMany'), () => {
           expect(users[1].Groups[0].User_has_Group.UserUserSecondId).to.be.equal(users[1].userSecondId);
           expect(users[1].Groups[0].User_has_Group.GroupGroupSecondId).to.be.ok;
           expect(users[1].Groups[0].User_has_Group.GroupGroupSecondId).to.be.equal(users[1].Groups[0].groupSecondId);
-          
+
           expect(groups.length).to.be.equal(2);
           expect(groups[0].Users.length).to.be.equal(1);
           expect(groups[1].Users.length).to.be.equal(1);
@@ -835,7 +835,7 @@ describe(Support.getTestDialectTeaser('BelongsToMany'), () => {
           expect(users[1].Groups[0].usergroups.userId2).to.be.equal(users[1].userSecondId);
           expect(users[1].Groups[0].usergroups.groupId2).to.be.ok;
           expect(users[1].Groups[0].usergroups.groupId2).to.be.equal(users[1].Groups[0].groupSecondId);
-          
+
           expect(groups.length).to.be.equal(2);
           expect(groups[0].Users.length).to.be.equal(1);
           expect(groups[1].Users.length).to.be.equal(1);
@@ -946,7 +946,7 @@ describe(Support.getTestDialectTeaser('BelongsToMany'), () => {
           expect(users[1].Groups[0].User_has_Group.userId2).to.be.equal(users[1].userSecondId);
           expect(users[1].Groups[0].User_has_Group.groupId2).to.be.ok;
           expect(users[1].Groups[0].User_has_Group.groupId2).to.be.equal(users[1].Groups[0].groupSecondId);
-          
+
           expect(groups.length).to.be.equal(2);
           expect(groups[0].Users.length).to.be.equal(1);
           expect(groups[1].Users.length).to.be.equal(1);
@@ -2601,7 +2601,7 @@ describe(Support.getTestDialectTeaser('BelongsToMany'), () => {
           });
         }).then(users => {
           const project = users[0].Projects[0];
-          
+
           expect(project.UserProjects).not.to.exist;
           expect(project.status).not.to.exist;
           expect(project.myProject).to.be.ok;
@@ -3311,18 +3311,12 @@ describe(Support.getTestDialectTeaser('BelongsToMany'), () => {
         UserFollowers = this.sequelize.define('UserFollower');
 
       User.belongsToMany(User, {
-        as: {
-          singular: 'Follower',
-          plural: 'Followers'
-        },
+        as: 'Followers',
         through: UserFollowers
       });
 
       User.belongsToMany(User, {
-        as: {
-          singular: 'Invitee',
-          plural: 'Invitees'
-        },
+        as: 'Invitees',
         foreignKey: 'InviteeId',
         through: 'Invites'
       });
@@ -3382,17 +3376,11 @@ describe(Support.getTestDialectTeaser('BelongsToMany'), () => {
       this.Event = this.sequelize.define('event', {});
       this.Individual.belongsToMany(this.Hat, {
         through: this.Event,
-        as: {
-          singular: 'personwearinghat',
-          plural: 'personwearinghats'
-        }
+        as: 'personwearinghats'
       });
       this.Hat.belongsToMany(this.Individual, {
         through: this.Event,
-        as: {
-          singular: 'hatwornby',
-          plural: 'hatwornbys'
-        }
+        as: 'hatwornbys'
       });
     });
 

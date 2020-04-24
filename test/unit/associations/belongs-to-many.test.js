@@ -7,11 +7,11 @@ const stub = sinon.stub;
 const _ = require('lodash');
 const Support = require('../support');
 const DataTypes = require('../../../lib/data-types');
-const BelongsTo = require('../../../lib/associations/belongs-to');
-const HasMany = require('../../../lib/associations/has-many');
-const HasOne = require('../../../lib/associations/has-one');
+const { BelongsTo } = require('../../../lib/associations/belongs-to');
+const { HasMany } = require('../../../lib/associations/has-many');
+const { HasOne } = require('../../../lib/associations/has-one');
 const current = Support.sequelize;
-const AssociationError = require('../../../lib/errors').AssociationError;
+const { AssociationError } = require('../../../lib/errors');
 
 describe(Support.getTestDialectTeaser('belongsToMany'), () => {
   it('throws when invalid model is passed', () => {
@@ -155,8 +155,8 @@ describe(Support.getTestDialectTeaser('belongsToMany'), () => {
       Task = current.define('Task', { title: DataTypes.STRING }),
       UserTasks = current.define('UserTasks', {});
 
-    User.belongsToMany(Task, { through: UserTasks });
-    Task.belongsToMany(User, { through: UserTasks });
+    User.belongsToMany(Task, { through: UserTasks, as: 'tasks' });
+    Task.belongsToMany(User, { through: UserTasks, as: 'users' });
 
     const user = User.build({
         id: 42
@@ -181,7 +181,8 @@ describe(Support.getTestDialectTeaser('belongsToMany'), () => {
     });
 
     it('uses one insert into statement', function() {
-      return user.setTasks([task1, task2]).then(() => {
+      console.log(user.associations === User.prototype.associations);
+      return user.associations.tasks.set([task1, task2]).then(() => {
         expect(this.findAll).to.have.been.calledOnce;
         expect(this.bulkCreate).to.have.been.calledOnce;
       });
@@ -195,8 +196,8 @@ describe(Support.getTestDialectTeaser('belongsToMany'), () => {
           { userId: 42, taskId: 16 }
         ]);
 
-      return user.setTasks([task1, task2]).then(() => {
-        return user.setTasks(null);
+      return user.associations.tasks.set([task1, task2]).then(() => {
+        return user.associations.tasks.set(null);
       }).then(() => {
         expect(this.findAll).to.have.been.calledTwice;
         expect(this.destroy).to.have.been.calledOnce;
@@ -625,12 +626,12 @@ describe(Support.getTestDialectTeaser('belongsToMany'), () => {
       expect(Object.keys(UserFollowers.rawAttributes).length).to.equal(3);
     });
 
-    it('works with singular and plural name for self-associations', () => {
+    it('works with name for self-associations', () => {
       // Models taken from https://github.com/sequelize/sequelize/issues/3796
       const Service = current.define('service', {});
 
       Service.belongsToMany(Service, { through: 'Supplements', as: 'supplements' });
-      Service.belongsToMany(Service, { through: 'Supplements', as: { singular: 'supplemented', plural: 'supplemented' } });
+      Service.belongsToMany(Service, { through: 'Supplements', as: 'supplementeds' });
 
 
       expect(Service.prototype).to.have.ownProperty('getSupplements').to.be.a('function');
@@ -638,10 +639,8 @@ describe(Support.getTestDialectTeaser('belongsToMany'), () => {
       expect(Service.prototype).to.have.ownProperty('addSupplement').to.be.a('function');
       expect(Service.prototype).to.have.ownProperty('addSupplements').to.be.a('function');
 
-      expect(Service.prototype).to.have.ownProperty('getSupplemented').to.be.a('function');
       expect(Service.prototype).not.to.have.ownProperty('getSupplementeds').to.be.a('function');
 
-      expect(Service.prototype).to.have.ownProperty('addSupplemented').to.be.a('function');
       expect(Service.prototype).not.to.have.ownProperty('addSupplementeds').to.be.a('function');
     });
   });

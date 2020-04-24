@@ -1694,10 +1694,7 @@ describe(Support.getTestDialectTeaser('HasMany'), () => {
         name: Sequelize.STRING
       });
       this.Individual.hasMany(this.Hat, {
-        as: {
-          singular: 'personwearinghat',
-          plural: 'personwearinghats'
-        }
+        as: 'personwearinghats'
       });
     });
 

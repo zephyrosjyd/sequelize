@@ -39,12 +39,12 @@ describe(Support.getTestDialectTeaser('Hooks'), () => {
     before(function() {
       this.sequelize.addHook('beforeDefine', (attributes, options) => {
         options.modelName = 'bar';
-        options.name.plural = 'barrs';
+        options.name = 'barr';
         attributes.type = DataTypes.STRING;
       });
 
       this.sequelize.addHook('afterDefine', factory => {
-        factory.options.name.singular = 'barr';
+        factory.options.name = 'barr';
       });
 
       this.model = this.sequelize.define('foo', { name: DataTypes.STRING });
@@ -55,7 +55,7 @@ describe(Support.getTestDialectTeaser('Hooks'), () => {
     });
 
     it('beforeDefine hook can alter options', function() {
-      expect(this.model.options.name.plural).to.equal('barrs');
+      expect(this.model.options.name).to.equal('barr');
     });
 
     it('beforeDefine hook can alter attributes', function() {
@@ -63,7 +63,7 @@ describe(Support.getTestDialectTeaser('Hooks'), () => {
     });
 
     it('afterDefine hook can alter options', function() {
-      expect(this.model.options.name.singular).to.equal('barr');
+      expect(this.model.options.name).to.equal('barr');
     });
 
     after(function() {

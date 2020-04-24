@@ -1160,21 +1160,6 @@ export interface ModelValidateOptions {
 export type ModelIndexesOptions = IndexesOptions
 
 /**
- * Interface for name property in InitOptions
- */
-export interface ModelNameOptions {
-  /**
-   * Singular model name
-   */
-  singular?: string;
-
-  /**
-   * Plural model name
-   */
-  plural?: string;
-}
-
-/**
  * Interface for getterMethods in InitOptions
  */
 export interface ModelGetterOptions<M extends Model = Model> {
@@ -1399,10 +1384,10 @@ export interface ModelOptions<M extends Model = Model> {
   freezeTableName?: boolean;
 
   /**
-   * An object with two attributes, `singular` and `plural`, which are used when this model is associated to
+   * A name, which are used when this model is associated to
    * others.
    */
-  name?: ModelNameOptions;
+  name?: string;
 
   /**
    * Set name of the model. By default its same as Class name.

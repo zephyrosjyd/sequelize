@@ -4,11 +4,10 @@ const chai = require('chai'),
   sinon = require('sinon'),
   expect = chai.expect,
   stub = sinon.stub,
-  _ = require('lodash'),
   Support = require('../support'),
   Promise = Support.Sequelize.Promise,
   DataTypes = require('../../../lib/data-types'),
-  HasMany = require('../../../lib/associations/has-many'),
+  { HasMany } = require('../../../lib/associations/has-many'),
   Op = require('../../../lib/operators'),
   current = Support.sequelize;
 
@@ -25,7 +24,9 @@ describe(Support.getTestDialectTeaser('hasMany'), () => {
     const User = current.define('User', { username: DataTypes.STRING }),
       Task = current.define('Task', { title: DataTypes.STRING });
 
-    User.hasMany(Task);
+    User.hasMany(Task, {
+      as: 'tasks'
+    });
 
     const user = User.build({
         id: 42
@@ -48,7 +49,7 @@ describe(Support.getTestDialectTeaser('hasMany'), () => {
     });
 
     it('uses one update statement for addition', function() {
-      return user.setTasks([task1, task2]).then(() => {
+      return user.associations.tasks.set([task1, task2]).then(() => {
         expect(this.findAll).to.have.been.calledOnce;
         expect(this.update).to.have.been.calledOnce;
       });
@@ -62,9 +63,9 @@ describe(Support.getTestDialectTeaser('hasMany'), () => {
           { userId: 42, taskId: 16 }
         ]);
 
-      return user.setTasks([task1, task2]).then(() => {
+      return user.associations.tasks.set([task1, task2]).then(() => {
         this.update.resetHistory();
-        return user.setTasks(null);
+        return user.associations.tasks.set(null);
       }).then(() => {
         expect(this.findAll).to.have.been.calledTwice;
         expect(this.update).to.have.been.calledOnce;
@@ -83,56 +84,7 @@ describe(Support.getTestDialectTeaser('hasMany'), () => {
 
       association.mixin(obj);
 
-      expect(obj[association.accessors.get]).to.be.an('function');
-      expect(obj[association.accessors.set]).to.be.an('function');
-      expect(obj[association.accessors.addMultiple]).to.be.an('function');
-      expect(obj[association.accessors.add]).to.be.an('function');
-      expect(obj[association.accessors.remove]).to.be.an('function');
-      expect(obj[association.accessors.removeMultiple]).to.be.an('function');
-      expect(obj[association.accessors.hasSingle]).to.be.an('function');
-      expect(obj[association.accessors.hasAll]).to.be.an('function');
-      expect(obj[association.accessors.count]).to.be.an('function');
-    });
-
-    it('should not override custom methods', () => {
-      const methods = {
-        getTasks: 'get',
-        countTasks: 'count',
-        hasTask: 'has',
-        hasTasks: 'has',
-        setTasks: 'set',
-        addTask: 'add',
-        addTasks: 'add',
-        removeTask: 'remove',
-        removeTasks: 'remove',
-        createTask: 'create'
-      };
-
-      _.each(methods, (alias, method) => {
-        User.prototype[method] = function() {
-          const realMethod = this.constructor.associations.task[alias];
-          expect(realMethod).to.be.a('function');
-          return realMethod;
-        };
-      });
-
-      User.hasMany(Task, { as: 'task' });
-
-      const user = User.build();
-
-      _.each(methods, (alias, method) => {
-        expect(user[method]()).to.be.a('function');
-      });
-    });
-
-    it('should not override attributes', () => {
-      const Project = current.define('Project', { hasTasks: DataTypes.BOOLEAN });
-
-      Project.hasMany(Task);
-
-      const company = Project.build();
-
-      expect(company.hasTasks).not.to.be.a('function');
+      expect(obj.associations[as]).to.be.an('object').with.member('get').that.is.a('function');
     });
   });
 

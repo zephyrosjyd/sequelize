@@ -21,7 +21,6 @@ export interface HasOneOptions extends AssociationOptions {
 }
 
 export class HasOne<S extends Model = Model, T extends Model = Model> extends Association<S, T> {
-  public accessors: SingleAssociationAccessors;
   constructor(source: ModelCtor<S>, target: ModelCtor<T>, options: HasOneOptions);
 }
 
